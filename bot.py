@@ -17,6 +17,7 @@ async def send_message(message, user_message, is_private):
 def run_discord_bot():
     load_dotenv()
     TOKEN = os.getenv('DISCORD_TOKEN').strip('{').strip('}')
+    GUILD_ID = os.getenv('GUILD_ID').strip('{').strip('}')
     intents = discord.Intents.all()
     intents.message_content = True
     client = discord.Client(intents=intents)
@@ -24,6 +25,20 @@ def run_discord_bot():
     @client.event
     async def on_ready():
         print(f'{client.user} is now running!')
+        print(GUILD_ID)
+
+#    @client.event
+#    async def on_ready():
+#    # Get the guild object for a specific server
+#        guild = client.get_guild(GUILD_ID)
+#
+#    # Iterate through each member in the server
+#    for member in guild.members:
+#        # Get the list of roles for the current member
+#        roles = member.roles
+#    
+#        # Print the member's name and their roles
+#        print(f"{member.name}: {[role.name for role in roles]}")
 
     @client.event
     async def on_message(message):
